@@ -4,6 +4,8 @@ from datetime import datetime
 from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
+# 候选人学历
+DEGREE_TYPE = ((u'本科', u'本科'), (u'硕士', u'硕士'), (u'博士', u'博士'))
 
 JobTypes = [
     (0,"技术类"),

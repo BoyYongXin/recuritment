@@ -1,11 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="e52c8557-12d6-4a0c-9c1f-de9faa011ef7" name="Default Changelist" comment="" />
+    <list default="true" id="e52c8557-12d6-4a0c-9c1f-de9faa011ef7" name="Default Changelist" comment="add:实现 简单的注册">
+      <change afterPath="$PROJECT_DIR$/export_api/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/export_api/editor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/interview/management/commands/_util.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/interview/management/commands/demo.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/interview/management/commands/import_candidates.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jobs/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/jobs/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jobs/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/jobs/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recuritment/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/recuritment/settings.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -19,7 +46,13 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/interview/management/commands" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/interview/management/commands" />
+      <recent name="$PROJECT_DIR$/interview" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="recuritment" type="Python.DjangoServer" factoryName="Django server">
@@ -57,10 +90,47 @@
       <option name="presentableId" value="Default" />
       <updated>1618279444934</updated>
       <workItem from="1618279446614" duration="102000" />
+      <workItem from="1618279710279" duration="2214000" />
+      <workItem from="1618381004784" duration="714000" />
+      <workItem from="1618582012609" duration="9744000" />
     </task>
+    <task id="LOCAL-00001" summary="add:实现 简单的注册">
+      <created>1618279764170</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1618279764170</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add:实现 简单的注册" />
+    <option name="LAST_COMMIT_MESSAGE" value="add:实现 简单的注册" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="370" y="209" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1618585996626">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="370" y="209" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.800@0.0.1280.800" timestamp="1618585996626" />
+    <state x="1840" y="280" key="Vcs.Push.Dialog.v2" timestamp="1618279770657">
+      <screen x="1280" y="0" width="1920" height="1080" />
+    </state>
+    <state x="1840" y="280" key="Vcs.Push.Dialog.v2/0.0.1280.800/1280.0.1920.1080@1280.0.1920.1080" timestamp="1618279770657" />
   </component>
 </project>
