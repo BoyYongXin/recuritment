@@ -73,6 +73,39 @@ class CandidateAdmin(admin.ModelAdmin):
     ### 列表页排序字段
     ordering = ('hr_result', 'second_result', 'first_result',)
 
+    # 列表页 字段更新
+    # list_editable = ('first_interviewer_user','second_interviewer_user',)
+    def get_list_editable(self, request):
+        group_names = self.get_group_names(request.user)
+
+        if request.user.is_superuser or 'hr' in group_names:
+            return ('first_interviewer_user', 'second_interviewer_user',)
+        return ()
+
+    def get_changelist_instance(self, request):
+        """
+        override admin method and list_editable property value
+        with values returned by our custom method implementation.
+        """
+        self.list_editable = self.get_list_editable(request)
+        return super(CandidateAdmin, self).get_changelist_instance(request)
+
+    #设置只读字段,谁都不可以修改
+    # readonly_fields = ( 'first_interviewer_user', 'second_interviewer_user',)
+    def get_group_names(self, user):
+        group_names = []
+        for g in user.groups.all():
+            group_names.append(g.name)
+        return group_names
+
+    def get_readonly_fields(self, request, obj):
+        group_names = self.get_group_names(request.user)
+
+        if 'interviewer' in group_names:
+            logger.info("interviewer is in user's group for %s" % request.user.username)
+            return ('first_interviewer_user','second_interviewer_user',)
+        return ()
+
     # 分组展示信息
     fieldsets = (
         (None, {"fields": ("userid",( "username", "city", "phone"), ("email", "apply_position", "born_address"), ("gender", "candidate_remark", "bachelor_school"), ("master_school", "doctor_school", "major"), ("degree", "test_score_of_general_ability", "paper_score"), )}),
