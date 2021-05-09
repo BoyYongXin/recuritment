@@ -1,7 +1,7 @@
 from django.contrib import admin
-from interview.models import Candidate
 from django.http import HttpResponse
 from django.db.models import Q
+from interview.models import Candidate
 from django.contrib import messages
 from django.utils.safestring import mark_safe
 from interview import candidate_field as cf
@@ -10,13 +10,14 @@ import csv
 from datetime import datetime
 from interview.models import Candidate
 from interview import dingtalk
+
 logger = logging.getLogger(__name__)
 
 # Register your models here.
 
-exportable_fields = ('username', 'city', 'phone', 'bachelor_school', 'master_school', 'degree', 'first_result', 'first_interviewer_user',
-                     'second_result', 'second_interviewer_user', 'hr_result', 'hr_score', 'hr_remark', 'hr_interviewer_user')
-
+exportable_fields = (
+'username', 'city', 'phone', 'bachelor_school', 'master_school', 'degree', 'first_result', 'first_interviewer_user',
+'second_result', 'second_interviewer_user', 'hr_result', 'hr_score', 'hr_remark', 'hr_interviewer_user')
 
 
 # 通知一面面试官面试
@@ -27,10 +28,12 @@ def notify_interviewer(modeladmin, request, queryset):
         candidates = obj.username + ";" + candidates
         interviewers = obj.first_interviewer_user.username + ";" + interviewers
     # 这里的消息发送到钉钉， 或者通过 Celery 异步发送到钉钉
-    dingtalk.send("候选人 %s 进入面试环节，亲爱的面试官，请准备好面试： %s" % (candidates, interviewers) )
+    dingtalk.send("候选人 %s 进入面试环节，亲爱的面试官，请准备好面试： %s" % (candidates, interviewers))
 
 
 notify_interviewer.short_description = u'通知一面面试官'
+
+
 # define export action
 def export_model_as_csv(modeladmin, request, queryset):
     """
@@ -61,24 +64,25 @@ def export_model_as_csv(modeladmin, request, queryset):
 
     return response
 
-#设置都出csv文件的短描述
+
+# 设置都出csv文件的短描述
 export_model_as_csv.short_description = u'导出为CSV文件'
 
 
 # 候选人管理类
 class CandidateAdmin(admin.ModelAdmin):
-    #指定导入的csv文件
-    actions = [export_model_as_csv,notify_interviewer]
+    # 指定导入的csv文件
+    actions = [export_model_as_csv, notify_interviewer]
 
     exclude = ('creator', 'created_date', 'modified_date')
-    #特定展示页面
+    # 特定展示页面
     list_display = (
         'username', 'city', 'bachelor_school', 'first_result', 'first_interviewer_user',
         'second_result', 'second_interviewer_user', 'hr_score', 'hr_result', 'last_editor',)
     # 右侧筛选条件
     list_filter = (
-    'city', 'first_result', 'second_result', 'hr_result', 'first_interviewer_user', 'second_interviewer_user',
-    'hr_interviewer_user')
+        'city', 'first_result', 'second_result', 'hr_result', 'first_interviewer_user', 'second_interviewer_user',
+        'hr_interviewer_user')
 
     # 查询字段
     search_fields = ('username', 'phone', 'email', 'bachelor_school')
@@ -87,7 +91,7 @@ class CandidateAdmin(admin.ModelAdmin):
     ordering = ('hr_result', 'second_result', 'first_result',)
 
     # 列表页 字段更新
-    # list_editable = ('first_interviewer_user','second_interviewer_user',)
+    ## list_editable = ('first_interviewer_user','second_interviewer_user',)
     def get_list_editable(self, request):
         group_names = self.get_group_names(request.user)
 
@@ -103,7 +107,7 @@ class CandidateAdmin(admin.ModelAdmin):
         self.list_editable = self.get_list_editable(request)
         return super(CandidateAdmin, self).get_changelist_instance(request)
 
-    #设置只读字段,谁都不可以修改
+    # 设置只读字段,谁都不可以修改
     # readonly_fields = ( 'first_interviewer_user', 'second_interviewer_user',)
     def get_group_names(self, user):
         group_names = []
@@ -116,16 +120,8 @@ class CandidateAdmin(admin.ModelAdmin):
 
         if 'interviewer' in group_names:
             logger.info("interviewer is in user's group for %s" % request.user.username)
-            return ('first_interviewer_user','second_interviewer_user',)
+            return ('first_interviewer_user', 'second_interviewer_user',)
         return ()
-
-    # 分组展示信息
-    fieldsets = (
-        (None, {"fields": ("userid",( "username", "city", "phone"), ("email", "apply_position", "born_address"), ("gender", "candidate_remark", "bachelor_school"), ("master_school", "doctor_school", "major"), ("degree", "test_score_of_general_ability", "paper_score"), )}),
-        ("第一轮面试记录", {"fields": ("first_score", ("first_learning_ability", "first_professional_competency"), "first_advantage", "first_disadvantage", "first_result", "first_recommend_position", "first_interviewer_user", "first_remark",)}),
-        ("第二轮面试记录", {"fields": ("second_score", ("second_learning_ability", "second_professional_competency"), "second_pursue_of_excellence", "second_communication_ability", "second_pressure_score", "second_advantage", "second_disadvantage", "second_result", "second_recommend_position", "second_interviewer_user", "second_remark",)}),
-        ("hr复试", {"fields": ("hr_score", ("hr_responsibility", "hr_communication_ability"), "hr_logic_ability", "hr_potential", "hr_stability", "hr_advantage", "hr_disadvantage", "hr_result", "hr_interviewer_user", "hr_remark",)}),
-    )
 
     # 一面面试官仅填写一面反馈， 二面面试官可以填写二面反馈
     def get_fieldsets(self, request, obj=None):
@@ -142,4 +138,6 @@ class CandidateAdmin(admin.ModelAdmin):
             obj.creator = request.user.username
         obj.modified_date = datetime.now()
         obj.save()
+
+
 admin.site.register(Candidate, CandidateAdmin)

@@ -185,6 +185,7 @@ LOGGING = {
 }
 
 ### LDAP
+'''
 # The URL of the LDAP server.
 LDAP_AUTH_URL = "ldap://localhost:389"
 # Initiate TLS on connection.
@@ -222,6 +223,7 @@ LDAP_AUTH_CONNECTION_PASSWORD = None
 # 可以使用 ldap 的等方式来登陆我们的系统   "django_python3_ldap.auth.LDAPBackend"
 # djano 自带的登录方式来登陆我们的系统     django.contrib.auth.backends.ModelBackend
 AUTHENTICATION_BACKENDS = {"django_python3_ldap.auth.LDAPBackend",'django.contrib.auth.backends.ModelBackend',}
-
+'''
 DINGTALK_WEB_HOOK = ""
+
 
