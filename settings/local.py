@@ -16,3 +16,7 @@ LDAP_AUTH_CONNECTION_PASSWORD = "admin_passwd_4_ldap"
 INSTALLED_APPS += (
     # other apps for production site
 )
+
+
+## 钉钉群的 WEB_HOOK， 用于发送钉钉消息
+DINGTALK_WEB_HOOK = "https://oapi.dingtalk.com/robot/send?access_token=xxxxx"

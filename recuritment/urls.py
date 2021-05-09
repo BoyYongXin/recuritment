@@ -19,7 +19,9 @@ from django.conf.urls import include, url
 from django.utils.translation import gettext_lazy as _
 urlpatterns = [
     url(r"^", include("jobs.urls")),
+    path('grappelli/', include('grappelli.urls')),  # grappelli URLS
     path('admin/', admin.site.urls),
+    path('accounts/', include('registration.backends.simple.urls')),
 
 ]
 admin.site.site_header = _('菜鸟科技招聘管理系统')
