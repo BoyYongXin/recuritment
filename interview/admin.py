@@ -4,12 +4,12 @@ from django.http import HttpResponse
 from django.db.models import Q
 from django.contrib import messages
 from django.utils.safestring import mark_safe
+from interview import candidate_field as cf
 import logging
 import csv
 from datetime import datetime
-
 from interview.models import Candidate
-
+from interview import dingtalk
 logger = logging.getLogger(__name__)
 
 # Register your models here.
@@ -18,6 +18,19 @@ exportable_fields = ('username', 'city', 'phone', 'bachelor_school', 'master_sch
                      'second_result', 'second_interviewer_user', 'hr_result', 'hr_score', 'hr_remark', 'hr_interviewer_user')
 
 
+
+# 通知一面面试官面试
+def notify_interviewer(modeladmin, request, queryset):
+    candidates = ""
+    interviewers = ""
+    for obj in queryset:
+        candidates = obj.username + ";" + candidates
+        interviewers = obj.first_interviewer_user.username + ";" + interviewers
+    # 这里的消息发送到钉钉， 或者通过 Celery 异步发送到钉钉
+    dingtalk.send("候选人 %s 进入面试环节，亲爱的面试官，请准备好面试： %s" % (candidates, interviewers) )
+
+
+notify_interviewer.short_description = u'通知一面面试官'
 # define export action
 def export_model_as_csv(modeladmin, request, queryset):
     """
@@ -55,7 +68,7 @@ export_model_as_csv.short_description = u'导出为CSV文件'
 # 候选人管理类
 class CandidateAdmin(admin.ModelAdmin):
     #指定导入的csv文件
-    actions = [export_model_as_csv,]
+    actions = [export_model_as_csv,notify_interviewer]
 
     exclude = ('creator', 'created_date', 'modified_date')
     #特定展示页面
@@ -113,4 +126,20 @@ class CandidateAdmin(admin.ModelAdmin):
         ("第二轮面试记录", {"fields": ("second_score", ("second_learning_ability", "second_professional_competency"), "second_pursue_of_excellence", "second_communication_ability", "second_pressure_score", "second_advantage", "second_disadvantage", "second_result", "second_recommend_position", "second_interviewer_user", "second_remark",)}),
         ("hr复试", {"fields": ("hr_score", ("hr_responsibility", "hr_communication_ability"), "hr_logic_ability", "hr_potential", "hr_stability", "hr_advantage", "hr_disadvantage", "hr_result", "hr_interviewer_user", "hr_remark",)}),
     )
+
+    # 一面面试官仅填写一面反馈， 二面面试官可以填写二面反馈
+    def get_fieldsets(self, request, obj=None):
+        group_names = self.get_group_names(request.user)
+        if 'interviewer' in group_names and obj.first_interviewer_user == request.user:
+            return cf.default_fieldsets_first
+        if 'interviewer' in group_names and obj.second_interviewer_user == request.user:
+            return cf.default_fieldsets_second
+        return cf.default_fieldsets
+
+    def save_model(self, request, obj, form, change):
+        obj.last_editor = request.user.username
+        if not obj.creator:
+            obj.creator = request.user.username
+        obj.modified_date = datetime.now()
+        obj.save()
 admin.site.register(Candidate, CandidateAdmin)
