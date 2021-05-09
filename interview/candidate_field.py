@@ -2,7 +2,16 @@
 default_fieldsets = (
     (None, {'fields': (
         "userid", ("username", "city", "phone"),
-        ("email", "apply_position", "born_address", "gender", "candidate_remark"),
+        ("email", "apply_position", "born_address"),
+        ("gender", "candidate_remark"),
+        ("bachelor_school", "master_school", "doctor_school"), ("major", "degree"), "test_score_of_general_ability",
+        "paper_score",)}),
+)
+base_fieldsets = (
+    (None, {'fields': (
+        "userid", ("username", "city", "phone"),
+        ("email", "apply_position", "born_address"),
+        ("gender", "candidate_remark"),
         ("bachelor_school", "master_school", "doctor_school"), ("major", "degree"), "test_score_of_general_ability",
         "paper_score",)}),
     ('第一轮面试', {'fields': (

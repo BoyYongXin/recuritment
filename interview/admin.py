@@ -67,12 +67,17 @@ def export_model_as_csv(modeladmin, request, queryset):
 
 # 设置都出csv文件的短描述
 export_model_as_csv.short_description = u'导出为CSV文件'
-
+export_model_as_csv.allowed_permissions = ('export',)
 
 # 候选人管理类
 class CandidateAdmin(admin.ModelAdmin):
     # 指定导入的csv文件
     actions = [export_model_as_csv, notify_interviewer]
+
+    # 当前用户是否有导出权限：
+    def has_export_permission(self, request):
+        opts = self.opts
+        return request.user.has_perm('%s.%s' % (opts.app_label, "export"))
 
     exclude = ('creator', 'created_date', 'modified_date')
     # 特定展示页面
@@ -131,6 +136,18 @@ class CandidateAdmin(admin.ModelAdmin):
         if 'interviewer' in group_names and obj.second_interviewer_user == request.user:
             return cf.default_fieldsets_second
         return cf.default_fieldsets
+
+    # 对于非管理员，非HR，获取自己是一面面试官或者二面面试官的候选人集合:s
+    def get_queryset(self, request):  # show data only owned by the user
+        """
+        """
+        qs = super(CandidateAdmin, self).get_queryset(request)
+
+        group_names = self.get_group_names(request.user)
+        if request.user.is_superuser or 'hr' in group_names:
+            return qs
+        return Candidate.objects.filter(
+            Q(first_interviewer_user=request.user) | Q(second_interviewer_user=request.user))
 
     def save_model(self, request, obj, form, change):
         obj.last_editor = request.user.username
