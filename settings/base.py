@@ -34,6 +34,7 @@ LOGIN_URL = '/accounts/login/'
 
 INSTALLED_APPS = [
     'grappelli',
+    'bootstrap4', # Bootstrap 来定制页面样式
     'registration',
     'django.contrib.admin',
     'django.contrib.auth',

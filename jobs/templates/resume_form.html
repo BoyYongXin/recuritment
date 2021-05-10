@@ -1,6 +1,27 @@
-<form method="post">{% csrf_token %}
-    {{ form.as_p}}
-    <input type="submit" value="Send message">
+{#<form method="post">{% csrf_token %}#}
+{#    {{ form.as_p}}#}
+{#    <input type="submit" value="Send message">#}
+{#</form>#}
 
 
+
+{# Load the tag library #}
+{% load bootstrap4 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+<h2>在线提交简历</h2>
+<form method="post" method="post" class="form" enctype="multipart/form-data" style="width:600px;margin-left:5px">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+
+    {% buttons %}
+    <button type="submit" class="btn btn-primary">
+      Submit
+    </button>
+    {% endbuttons %}
 </form>
