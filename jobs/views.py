@@ -1,19 +1,19 @@
 from django.shortcuts import render
 from django.http import Http404
-# Create your views here.
 from jobs.models import Job
-
 from jobs.models import Cities, JobTypes
 from django.template import RequestContext, loader
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin # 继承多个类
 from django.views.generic.edit import CreateView
+from django.views.generic.detail import DetailView
 from jobs.models import Resume
 
 import logging
 
 logger = logging.getLogger(__name__)
+# Create your views here.
 
 # def joblist(request):
 #     job_list = Job.objects.order_by('job_type')
@@ -53,6 +53,23 @@ def detail(request, job_id):
     except Job.DoesNotExist:
         raise Http404("Job does not exist")
     return render(request, 'job.html', {'job': job})
+
+
+'''
+    直接返回  HTML 内容的视图 （这段代码返回的页面有 XSS 漏洞，能够被攻击者利用）
+'''
+def detail_resume(request, resume_id):
+    try:
+        resume = Resume.objects.get(pk=resume_id)
+        content = "name: %s <br>  introduction: %s <br>" % (resume.username, resume.candidate_introduction)
+        return HttpResponse(content)
+    except Resume.DoesNotExist:
+        raise Http404("resume does not exist")
+
+class ResumeDetailView(DetailView):
+    """   简历详情页    """
+    model = Resume
+    template_name = 'resume_detail.html'
 
 class ResumeCreateView(LoginRequiredMixin, CreateView):
     """    简历职位页面  """
