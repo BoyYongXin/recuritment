@@ -188,7 +188,7 @@ LOGGING = {
 }
 
 ### LDAP
-'''
+'''  
 # The URL of the LDAP server.
 LDAP_AUTH_URL = "ldap://localhost:389"
 # Initiate TLS on connection.
