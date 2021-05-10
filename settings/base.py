@@ -48,6 +48,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # 'interview.performance.PerformanceAndExceptionLoggerMiddleware',
+    'interview.performance.performance_logger_middleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -179,11 +181,11 @@ LOGGING = {
             "level": "DEBUG",
         },
 
-        # "interview.performance": {
-        #     "handlers": ["console", "performance"],
-        #     "level": "INFO",
-        #     "propagate": False,
-        # },
+    "interview.performance": {
+        "handlers": ["console", "performance"],
+        "level": "INFO",
+        "propagate": False,
+    },
     },
 }
 
