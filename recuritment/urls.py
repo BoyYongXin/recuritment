@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include, url
 from django.utils.translation import gettext_lazy as _
+
 urlpatterns = [
     url(r"^", include("jobs.urls")),
     path('grappelli/', include('grappelli.urls')),  # grappelli URLS
