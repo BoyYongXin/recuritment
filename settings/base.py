@@ -25,7 +25,7 @@ SECRET_KEY = '7m7engi&*m6q148)%$*canj#rz3)ckq86d@yf+cq-q086f@*gq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost","127.0.0.1 "]
+ALLOWED_HOSTS = ["localhost","127.0.0.1"]
 
 LOGIN_REDIRECT_URL = '/'   # 登录后呈现给用户的页面
 LOGIN_URL = '/accounts/login/'
