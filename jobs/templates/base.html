@@ -33,28 +33,27 @@
             <br>{% translate "欢迎你，期待加入我们，登陆后可以提交简历." %}<br>
         {% endif %}
     </div>
-{##}
-{#<div style="flex: 1; align-content:right;">#}
-{#<form action="{% url 'set_language' %}" method="post" style="margin-block-end: 0em;">{% csrf_token %}#}
-{#    <input name="next" type="hidden" value="{{ redirect_to }}">#}
-{#    <select name="language">#}
-{#        {% get_current_language as LANGUAGE_CODE %}#}
-{#        {% get_available_languages as LANGUAGES %}#}
-{#        {% get_language_info_list for LANGUAGES as languages %}#}
-{#        {% for language in languages %}#}
-{#            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>#}
-{#                {{ language.name_local }} ({{ language.code }})#}
-{#            </option>#}
-{#        {% endfor %}#}
-{#    </select>#}
-{##}
-{#	<input type="submit" value={% translate "Switch" %} style="font-size:12;height:20px">#}
-{#</form>#}
-{#</div>#}
+    {#提供选则语言的下啦列表#}
+    <div style="flex: 1; align-content:right;">
+        <form action="{% url 'set_language' %}" method="post" style="margin-block-end: 0em;">{% csrf_token %}
+            <input name="next" type="hidden" value="{{ redirect_to }}">
+            <select name="language">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as languages %}
+                {% for language in languages %}
+                    <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                        {{ language.name_local }} ({{ language.code }})
+                    </option>
+                {% endfor %}
+            </select>
+
+            <input type="submit" value={% translate "Switch" %} style="font-size:12;height:20px">
+        </form>
+    </div>
 </div>
-{#<hr style="margin-top: 0px; ">#}
+<hr style="margin-top: 0px; ">
+
 {% endblock %}
-
-
 {% block content %}
 {% endblock %}
