@@ -64,7 +64,10 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',#配置多语言的中间件
+
+    'django.middleware.cache.UpdateCacheMiddleware', # 更新缓存的数据
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',#优先从缓存系统取数据
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -155,6 +158,27 @@ elif platform.system() == "Darwin" or platform.system() == "Mac":
     # OS X,
     # you could not create a folder at /data/logs dure to OS default policy
     LOG_DIR = BASE_DIR
+
+
+# redis cache is disabled, change "CACHES_redis" to "CACHES" to enable it
+
+# 加入redis的缓存
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        'TIMEOUT': 60, # default expire time per api call
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            # "PASSWORD": "mysecret",
+            "SOCKET_CONNECT_TIMEOUT": 5,  # in seconds
+            "SOCKET_TIMEOUT": 5,  # r/w timeout in seconds
+            # 'MAX_ENTRIES': 10000,
+            # 'KEY_PREFIX': 'recruit-',
+        }
+    }
+}
+
 
 LOGGING = {
     'version': 1,
