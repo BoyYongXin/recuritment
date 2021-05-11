@@ -9,6 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin # 继承多个类
 from django.views.generic.edit import CreateView
 from django.views.generic.detail import DetailView
 from jobs.models import Resume
+import html
 
 import logging
 
@@ -62,7 +63,7 @@ def detail_resume(request, resume_id):
     try:
         resume = Resume.objects.get(pk=resume_id)
         content = "name: %s <br>  introduction: %s <br>" % (resume.username, resume.candidate_introduction)
-        return HttpResponse(content)
+        return HttpResponse(html.escape(content))
     except Resume.DoesNotExist:
         raise Http404("resume does not exist")
 

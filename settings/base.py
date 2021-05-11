@@ -50,8 +50,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    # 'interview.performance.PerformanceAndExceptionLoggerMiddleware',
-    'interview.performance.performance_logger_middleware',
+    'interview.performance.PerformanceAndExceptionLoggerMiddleware',# 日志中间件。类实现
+    # 'interview.performance.performance_logger_middleware',# 日志中间件 ，函数
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',#配置多语言的中间件
