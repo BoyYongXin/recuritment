@@ -47,7 +47,16 @@ INSTALLED_APPS = [
     'jobs',
     'interview',
     'django_python3_ldap',
+    'rest_framework',
 ]
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
 
 MIDDLEWARE = [
     'interview.performance.PerformanceAndExceptionLoggerMiddleware',# 日志中间件。类实现
