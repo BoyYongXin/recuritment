@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.simple.urls')),
     # path(r'^accounts/', include('registration.backends.simple.urls')),
-
+path('i18n/', include('django.conf.urls.i18n')),
 
 ]
 admin.site.site_header = _('菜鸟科技招聘管理系统')
