@@ -12,6 +12,7 @@ class ReadOnlyAdmin(admin.ModelAdmin):
 
     readonly_fields = []
 
+    # 设置列表页list_display展示所有字段
     def get_list_display(self, request):
         return [field.name for field in self.model._meta.concrete_fields]
 
@@ -44,4 +45,4 @@ class ProvinceAdmin(ReadOnlyAdmin):
 class CityAdmin(ReadOnlyAdmin):
     autocomplete_fields = ['provinceid', 'countryid', ]
 
-    list_display = ('cityid', 'countryid', 'areaid', 'provinceid', 'chn_name', 'eng_name')
+    #list_display = ('cityid', 'countryid', 'areaid', 'provinceid', 'chn_name', 'eng_name')
