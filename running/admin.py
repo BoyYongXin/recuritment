@@ -46,3 +46,19 @@ class CityAdmin(ReadOnlyAdmin):
     autocomplete_fields = ['provinceid', 'countryid', ]
 
     #list_display = ('cityid', 'countryid', 'areaid', 'provinceid', 'chn_name', 'eng_name')
+
+
+# 自动注册所有model
+class AdminClass(admin.ModelAdmin):
+    def __init__(self,model,admin_site):
+        #列表显示所有的字段
+        self.list_display = [field.name for field in model._meta.fields ]
+        super(AdminClass,self).__init__(model,admin_site)
+
+from django.apps import apps
+models = apps.get_models()
+for model in models:
+    try:
+        admin.site.register(model,AdminClass)
+    except admin.sites.AlreadyRegistered:
+        pass
