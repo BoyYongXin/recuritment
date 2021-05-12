@@ -24,6 +24,7 @@ from jobs.models import Job
 from rest_framework import routers, serializers, viewsets
 
 # Serializers define the API representation.
+# 开放api配置
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
@@ -74,4 +75,23 @@ urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
 
 ]
+
+
+from django.conf.urls import include, url
+from django.conf import settings
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+            path('__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
+
+
+# 文件和图片上传
+from django.conf.urls.static import static
+if settings.DEBUG:
+        urlpatterns += static(settings.MEDIA_URL,
+                              document_root=settings.MEDIA_ROOT)
+
+
 admin.site.site_header = _('菜鸟科技招聘管理系统')

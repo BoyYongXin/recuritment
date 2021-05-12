@@ -15,6 +15,7 @@
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
 <h2>在线提交简历</h2>
+{#enctype="multipart/form-data"  制定编码类型#}
 <form method="post" method="post" class="form" enctype="multipart/form-data" style="width:600px;margin-left:5px">
     {% csrf_token %}
     {% bootstrap_form form %}

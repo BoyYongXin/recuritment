@@ -57,6 +57,7 @@ class Resume(models.Model):
     apply_position = models.CharField(max_length=135, blank=True, verbose_name=_('应聘职位'))
     born_address = models.CharField(max_length=135, blank=True, verbose_name=_('生源地'))
     gender = models.CharField(max_length=135, blank=True, verbose_name=_('性别'))
+
     picture = models.ImageField(upload_to='images/', blank=True, verbose_name=_('个人照片'))
     attachment = models.FileField(upload_to='file/', blank=True, verbose_name=_('简历附件'))
 

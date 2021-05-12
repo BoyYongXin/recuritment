@@ -22,3 +22,4 @@ django-prometheus==2.1.0
 django-simple-captcha==0.5.13
 Pillow==8.0.1
 django-ratelimit==3.0.1
+
