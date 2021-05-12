@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django_python3_ldap',
     'rest_framework',
     'django_celery_beat',
+    #'django_oss_storage', 启用oss服务
 ]
 
 REST_FRAMEWORK = {
