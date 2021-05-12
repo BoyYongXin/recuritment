@@ -31,7 +31,7 @@ from recuritment.tasks import add
 # 在代码里注册定时任务
 app.conf.beat_schedule = {
     'add-every-10-seconds': {
-        'task': 'recruitment.tasks.add',
+        'task': 'recuritment.tasks.add',
         'schedule': 10.0,
         'args': (16, 4,)
     },
@@ -53,20 +53,21 @@ def setup_periodic_tasks(sender, **kwargs):
     )
 
 
+# # 系统启用后，动态添加定时任务
+# import json
+# from django_celery_beat.models import PeriodicTask, IntervalSchedule
+#
+# # 先创建定时策略
+# schdule, created = IntervalSchedule.objects.get_or_create(every=10, period=IntervalSchedule.SECONDS)
+#
+# # 在创建任务
+# task = PeriodicTask.objects.create(interval=schdule, name="say hello 2025", task='recuritment.celery.test',
+#                                    args=(json.dumps(["welcome"]),))
+
+
 @app.task
 def test(arg):
     print(arg)
 
-
-# 系统启用后，动态添加定时任务
-import json
-from django_celery_beat.models import PeriodicTask, IntervalSchedule
-
-# 先创建定时策略
-schdule, created = IntervalSchedule.objects.get_or_create(every=10, period=IntervalSchedule.SECONDS)
-
-# 在创建任务
-task = PeriodicTask.objects.create(interval=schdule, name="say hello", task='recuritment.test',
-                                   args=json.dumps(["welcome"]), )
-
 app.conf.timezone = "Asia/Shanghai"
+
