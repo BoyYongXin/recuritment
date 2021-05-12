@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'interview',
     'django_python3_ldap',
     'rest_framework',
+    'django_celery_beat',
 ]
 
 REST_FRAMEWORK = {
