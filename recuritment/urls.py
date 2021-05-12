@@ -74,6 +74,7 @@ urlpatterns = [
     # 多语言配置路由
     path('i18n/', include('django.conf.urls.i18n')),
 
+
 ]
 
 

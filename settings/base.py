@@ -101,10 +101,10 @@ WSGI_APPLICATION = 'recuritment.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # },
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    },
     # 'running': {
     #     'ENGINE': 'django.db.backends.mysql',
     #     'NAME': 'running',
@@ -113,26 +113,9 @@ DATABASES = {
     #     'HOST': 'running',
     #     'PORT': '3306',
     # },
-'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'test',
-        'USER': 'w_crawlmedia',
-        'PASSWORD': 'DmQgsA6k5HM58keQ',
-        'HOST': '10.126.159.9',
-        'PORT': '3307',
-    },
-
-'running': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'test',
-        'USER': 'w_crawlmedia',
-        'PASSWORD': 'DmQgsA6k5HM58keQ',
-        'HOST': '10.126.159.9',
-        'PORT': '3307',
-    },
 }
 # 数据库路由，可以用来做读写分离
-DATABASE_ROUTERS = ['settings.router.DatabaseRouter']
+# DATABASE_ROUTERS = ['settings.router.DatabaseRouter']
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
