@@ -272,6 +272,3 @@ LDAP_AUTH_CONNECTION_PASSWORD = None
 # djano 自带的登录方式来登陆我们的系统     django.contrib.auth.backends.ModelBackend
 AUTHENTICATION_BACKENDS = {"django_python3_ldap.auth.LDAPBackend",'django.contrib.auth.backends.ModelBackend',}
 '''
-DINGTALK_WEB_HOOK = ""
-
-

@@ -5,4 +5,5 @@ DJANGO_SETTINGS_MODULE=settings.local celery -A recuritment worker -l INFO
 
 # 启动flower监控服务
 #DJANGO_SETTINGS_MODULE=settings.local celery -A recuritment flower --broker=redis://127.0.0.1/0
+#DJANGO_SETTINGS_MODULE=settings.local celery -A recuritment flower
 
