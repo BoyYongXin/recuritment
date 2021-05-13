@@ -35,8 +35,9 @@ LOGIN_URL = '/accounts/login/'
 # Application definition
 
 INSTALLED_APPS = [
-    'grappelli',
+    'simpleui',
     'bootstrap4', # Bootstrap 来定制页面样式
+    'grappelli',
     'registration',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -47,13 +48,24 @@ INSTALLED_APPS = [
     #'running',
     # 'jobs', ## 应用不能重复注册，下面一行是手工注册 JobConfig
     'jobs.apps.JobConfig',
+    #'haystack',#搜索https://django-haystack.readthedocs.io/en/master/tutorial.html#installation
     'interview',
     'django_python3_ldap',
     'rest_framework',
     'django_celery_beat',
+    #'captcha', # 暂未实现
     #'django_oss_storage', 启用oss服务
     #'recuritment.apps.UniversalManagerApp',#自动注册model
 ]
+
+# 全局搜索，暂未实现
+# import os
+# HAYSTACK_CONNECTIONS = {
+#     'default': {
+#         'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+#         'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+#     },
+# }
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
@@ -173,6 +185,9 @@ LOG_DIR = "/data/logs/recruitment/"
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+STATICFILES_DIRS = [
+     os.path.join(BASE_DIR, "static"),
+ ]
 
 if platform.system() == "Linux" or platform.system() == "Windows":
     # linux or windows

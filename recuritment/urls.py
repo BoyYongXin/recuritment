@@ -72,7 +72,7 @@ urlpatterns = [
 
     # 多语言配置路由
     path('i18n/', include('django.conf.urls.i18n')),
-
+    # path('captcha/', include('captcha.urls')), # 暂未实现
 
 ]
 
