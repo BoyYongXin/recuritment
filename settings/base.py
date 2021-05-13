@@ -44,14 +44,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'running',
-    'jobs',
+    #'running',
+    # 'jobs', ## 应用不能重复注册，下面一行是手工注册 JobConfig
+    'jobs.apps.JobConfig',
     'interview',
     'django_python3_ldap',
     'rest_framework',
     'django_celery_beat',
     #'django_oss_storage', 启用oss服务
-    'recuritment.apps.UniversalManagerApp',#自动注册model
+    #'recuritment.apps.UniversalManagerApp',#自动注册model
 ]
 
 REST_FRAMEWORK = {
