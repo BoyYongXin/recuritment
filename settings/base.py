@@ -293,3 +293,6 @@ LDAP_AUTH_CONNECTION_PASSWORD = None
 # djano 自带的登录方式来登陆我们的系统     django.contrib.auth.backends.ModelBackend
 AUTHENTICATION_BACKENDS = {"django_python3_ldap.auth.LDAPBackend",'django.contrib.auth.backends.ModelBackend',}
 '''
+
+## 钉钉群的 WEB_HOOK， 用于发送钉钉消息
+DINGTALK_WEB_HOOK = "https://oapi.dingtalk.com/robot/send?access_token=db2f938b6580fc7606f1d03f64e32c2418f15caf2937c24604cb089f93b594a2"

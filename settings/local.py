@@ -14,13 +14,10 @@ SECRET_KEY = '7m7engi&*m6q148)%$*canj#rz3)ckq86d@yf+cq-q086f@*gq'
 # LDAP_AUTH_CONNECTION_PASSWORD = "admin_passwd_4_ldap"
 
 INSTALLED_APPS += (
-    'running',
+    #'running',
     # other apps for production site
 )
 
-
-## 钉钉群的 WEB_HOOK， 用于发送钉钉消息
-DINGTALK_WEB_HOOK = "https://oapi.dingtalk.com/robot/send?access_token=db2f938b6580fc7606f1d03f64e32c2418f15caf2937c24604cb089f93b594a2"
 
 ## celery  基础配置
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
@@ -51,3 +48,4 @@ sentry_sdk.init(
     send_default_pii=True
 )
 '''
+
