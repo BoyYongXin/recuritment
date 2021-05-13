@@ -14,9 +14,17 @@ SECRET_KEY = '7m7engi&*m6q148)%$*canj#rz3)ckq86d@yf+cq-q086f@*gq'
 # LDAP_AUTH_CONNECTION_PASSWORD = "admin_passwd_4_ldap"
 
 INSTALLED_APPS += (
-    #'running',
+    'django.contrib.staticfiles',
+    'debug_toolbar',
     # other apps for production site
 )
+
+INTERNAL_IPS = [
+    # ...
+    '127.0.0.1',
+    # ...
+]
+STATIC_URL = '/static/'
 
 
 ## celery  基础配置
@@ -29,6 +37,8 @@ CELERY_TIMEZONE = 'Asia/Shanghai'
 CELERYD_MAX_TASKS_PER_CHILD = 10
 CELERYD_LOG_FILE = os.path.join(BASE_DIR, "logs", "celery_work.log")
 CELERYBEAT_LOG_FILE = os.path.join(BASE_DIR, "logs", "celery_beat.log")
+
+
 
 
 ###  设置sentry 错误日志收集

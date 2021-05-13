@@ -55,7 +55,6 @@ router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'jobs', JobViewSet)
 
-
 urlpatterns = [
 
     url(r"^", include("jobs.urls")),

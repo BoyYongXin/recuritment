@@ -64,8 +64,10 @@ REST_FRAMEWORK = {
 }
 
 MIDDLEWARE = [
+    'django_prometheus.middleware.PrometheusBeforeMiddleware',
     'interview.performance.PerformanceAndExceptionLoggerMiddleware',# 日志中间件。类实现
     # 'interview.performance.performance_logger_middleware',# 日志中间件 ，函数
+    'debug_toolbar.middleware.DebugToolbarMiddleware', # 提供一个可以查看debug信息的面板(包括SQL执行时间，页面耗时)
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',#配置多语言的中间件
