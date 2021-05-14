@@ -148,7 +148,7 @@ class CandidateAdmin(admin.ModelAdmin):
             return cf.default_fieldsets_first
         if 'interviewer' in group_names and obj.second_interviewer_user == request.user:
             return cf.default_fieldsets_second
-        return cf.default_fieldsets
+        return cf.base_fieldsets
 
     # 对于非管理员，非HR，获取自己是一面面试官或者二面面试官的候选人集合:s
     def get_queryset(self, request):  # show data only owned by the user
