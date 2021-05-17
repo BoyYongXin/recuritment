@@ -179,15 +179,15 @@ LOCALE_PATHS = (
 STATIC_URL = '/static/'
 LOG_DIR = "/data/logs/recruitment/"
 
-# STATIC_ROOT = 'static'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # 存储图片路径
-MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
-
-STATICFILES_DIRS = [
-     os.path.join(BASE_DIR, "static"),
- ]
+# MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+# MEDIA_URL = '/media/'
+#
+# STATICFILES_DIRS = [
+#      os.path.join(BASE_DIR, "static"),
+#  ]
 
 if platform.system() == "Linux" or platform.system() == "Windows":
     # linux or windows

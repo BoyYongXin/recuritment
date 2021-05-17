@@ -14,8 +14,8 @@ SECRET_KEY = '7m7engi&*m6q148)%$*canj#rz3)ckq86d@yf+cq-q086f@*gq'
 # LDAP_AUTH_CONNECTION_PASSWORD = "admin_passwd_4_ldap"
 
 INSTALLED_APPS += (
-    'django.contrib.staticfiles',
-    'debug_toolbar',
+    # 'django.contrib.staticfiles',
+    # 'debug_toolbar',
     # other apps for production site
 )
 
